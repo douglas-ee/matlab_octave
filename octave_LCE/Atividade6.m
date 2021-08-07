@@ -1,57 +1,41 @@
+%calculadora parametro sére
+
+%S01 = 5kVA    fp01 = 0.6 (atrasado)
+%S02 = 15kVA   fp02 = 0.5 (atrasado)
+%S03 = 10kVA   fp03 = 0.9 (adiantado)
+%V = 220v      60Hz
+
 fp01 = 0.6;
-s01 = 5000*fp01 + j*5000*sin(acos(fp01));
+P01 = 5000;
+S01 = P01*fp01 + j*P01*sin(acos(fp01));
+
 fp02 = 0.5;
-s02 = 15000*fp02 + j*15000*sin(acos(fp02));
+P02 = 15000;
+S02 = P02*fp02 + j*P02*sin(acos(fp02));
+
 fp03 = 0.9;
-s03 = 10000*fp03 - j*10000*sin(acos(fp03));
+P03 = 10000;
+S03 = P03*fp03 - j*P03*sin(acos(fp03));
 
-s123 = s01 + s02 + s03
-abs123 = abs(s123)
-fp123 = real(s123)/abs(s123)
+S123 = S01 + S02 + S03;
 
-s12 = s01 + s02
-abs12 = abs(s12)
-fp12 = real(s12)/abs(s12)
+S12 = S01 + S02;
 
-s13 = s01 + s03
-abs13 = abs(s13)
-fp13 = real(s13)/abs(s13)
+S13 = S01 + S03;
 
-s23 = s02 + s03
-abs23 = abs(s23)
-fp23 = real(s23)/abs(s23)
-
-I123 = conj(s123/220);
-I12 = conj(s12/220);
-I13 = conj(s13/220);
-I23 = conj(s123/220);
-
-i123 = abs(I123)
-i12 = abs(I12)
-i13 = abs(I13)
-i23 = abs(I23)
+S23 = S02 + S03;
 
 
-subplot(2,2,1)
-plot([0 real(s123)], [0 0],....
-     [real(s123) real(s123)], [0 imag(s123)],....
-     [0 real(s123)], [0 imag(s123)])
-xlabel('Real'),ylabel('Imag.')
+Q = imag(S123);
 
-subplot(2,2,2)
-plot([0 real(s12)], [0 0],....
-     [real(s12) real(s12)], [0 imag(s12)],....
-     [0 real(s12)], [0 imag(s12)])
-xlabel('Real'),ylabel('Imag.')
+%Q = abs(V)^2/X
 
-subplot(2,2,3)
-plot([0 real(s13)], [0 0],....
-     [real(s13) real(s13)], [0 imag(s13)],....
-     [0 real(s13)], [0 imag(s13)])
-xlabel('Real'),ylabel('Imag.')
+X = 220^2/Q; %Xc = 1/(wC); Xl = wL
+w = 2*pi*60;
 
-subplot(2,2,4)
-plot([0 real(s23)], [0 0],....
-     [real(s23) real(s23)], [0 imag(s23)],....
-     [0 real(s23)], [0 imag(s23)])
-xlabel('Real'),ylabel('Imag.')  
+if(Q>0)
+L = X/w
+else
+C = 1/(w*X)
+endif
+R = 220^2/real(S123)

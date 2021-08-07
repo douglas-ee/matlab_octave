@@ -1,41 +1,43 @@
-%calculadora parametro sére
-
-%S01 = 5kVA    fp01 = 0.6 (atrasado)
-%S02 = 15kVA   fp02 = 0.5 (atrasado)
-%S03 = 10kVA   fp03 = 0.9 (adiantado)
-%V = 220v      60Hz
+#Combinações possívies para as Cargas
+# 000, 001, 010, 011
+# 100, 101, 110, 111
 
 fp01 = 0.6;
-P01 = 5000;
-S01 = P01*fp01 + j*P01*sin(acos(fp01));
+S01 = 5000*fp01 + j*5000*sin(acos(fp01));
+% S01 = P01 + jQ01
 
-fp02 = 0.5;
-P02 = 15000;
-S02 = P02*fp02 + j*P02*sin(acos(fp02));
+fp02 = 0.5; 
+S02 = 15000*fp02 + j*15000*sin(acos(fp02));
 
 fp03 = 0.9;
-P03 = 10000;
-S03 = P03*fp03 - j*P03*sin(acos(fp03));
+S03 = 10000*fp03 - j*10000*sin(acos(fp03));
 
-S123 = S01 + S02 + S03;
-
-S12 = S01 + S02;
-
+#Combinação
 S13 = S01 + S03;
 
-S23 = S02 + S03;
+Q13 = imag(S13);
+P13 = real(S13);
 
+#Compensação do fator de potência (Banco de capacitores)
+#fp_ = 0;
+#absS000_ = real(S000) / fp_;#fp = P /|S|
+#Q000_ = sqrt( absS000_^2 - real(S000)^2);#S^2 = P^2 + Q^2
 
-Q = imag(S123);
+#Qc = imag(S000) - Q000_;#Q = Q_ + Qc -> Qc = Q - Q_
 
-%Q = abs(V)^2/X
+#Em paralelo ( PDF AULA 4)
+#Qc = |v|^2/Xc, Assim
 
-X = 220^2/Q; %Xc = 1/(wC); Xl = wL
+Xc = (220)^2/Q13;#Xc = 1/j(wC)
 w = 2*pi*60;
 
-if(Q>0)
-L = X/w
-else
-C = 1/(w*X)
-endif
-R = 220^2/real(S123)
+C = abs(1/(j*w*Xc))
+
+R = 220^2/P13
+
+#Serie
+#Calcular usando a impedância 
+
+
+
+ 
