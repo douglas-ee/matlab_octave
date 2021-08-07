@@ -23,3 +23,5 @@ vec_null = zeros(4,1)
 vec_null = zeros(1,4)
 vec_null = ones(4,1)
 vec_null = ones(1,4)
+
+vec_null = ones(7,7)
