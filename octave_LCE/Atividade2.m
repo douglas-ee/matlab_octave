@@ -1,4 +1,8 @@
 clear all
+%S01 = 5kVA    fp01 = 0.6 (atrasado)
+%S02 = 15kVA   fp02 = 0.5 (atrasado)
+%S03 = 10kVA   fp03 = 0.9 (adiantado)
+%V = 220v      60Hz
 
 %fatores de potencia cos(teta) = f.p = P/|S|
 fp01 = 0.6;
