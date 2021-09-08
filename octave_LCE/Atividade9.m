@@ -149,4 +149,4 @@ ylabel('Potência Reativa (VAr)')
 title('Triangulo Da Potencia OP09')
 
 %salvando o grafico em JPG
-saveas(gca, 'grafico_9_.jpg', 'jpg')
+saveas(gca, 'grafico_9_c.jpg', 'jpg')

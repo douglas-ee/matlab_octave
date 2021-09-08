@@ -2,6 +2,8 @@
 
 % Ir(w) e Ic(w)
 
+
+## organizacao das equacoes necessairas
 %I = Ir + Ic
 %Ir = (1/(j*w*C))/((R + 1)/(j*w*C))
 %V = R*Ir = (1/(j*w*C))*Ic
