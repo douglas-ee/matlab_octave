@@ -1,10 +1,10 @@
-clear
-clc
 
 %dados da questao
 tensao = 220;
 frequencia = 60;
 
+%###############################################################################
+% MUDANDO OS VALORES DOS MOTORES PARA OBTER O RESULTADO DESEJADO NA COMBINAÇAO
 %###############################################################################
 
 %potencia aderida
@@ -32,13 +32,29 @@ P100_B = (pot_B*(100/100))/(66/100);
 %###############################################################################
 
 %carga S = P + iQ por rendimento% do motor
-S50_A = P50_A*fp50_A + i*P50_A*sin(acos(fp50_A));
-S75_A = P75_A*fp75_A + i*P75_A*sin(acos(fp75_A));
-S100_A = P100_A*fp100_A + i*P100_A*sin(acos(fp100_A));
+## S50_A = P50_A*fp50_A + i*P50_A*sin(acos(fp50_A));
+## S75_A = P75_A*fp75_A + i*P75_A*sin(acos(fp75_A));
+## S100_A = P100_A*fp100_A + i*P100_A*sin(acos(fp100_A));
 
-S50_B = P50_B*fp50_B + i*P50_B*sin(acos(fp50_B));
-S75_B = P75_B*fp75_B + i*P75_B*sin(acos(fp75_B));
-S100_B = P100_B*fp100_B + i*P100_B*sin(acos(fp100_B));
+## S50_B = P50_B*fp50_B + i*P50_B*sin(acos(fp50_B));
+## S75_B = P75_B*fp75_B + i*P75_B*sin(acos(fp75_B));
+## S100_B = P100_B*fp100_B + i*P100_B*sin(acos(fp100_B));
+
+abs_S50_A = P50_A/fp50_A;
+abs_S75_A = P75_A/fp75_A;
+abs_S100_A = P100_A/fp100_A;
+
+abs_S50_B = P50_B/fp50_B;
+abs_S75_B = P75_B/fp75_B;
+abs_S100_B = P100_B/fp100_B;
+
+S50_A = abs_S50_A*exp(j*(acos(fp50_A)));
+S75_A = abs_S75_A*exp(j*(acos(fp75_A)));
+S100_A = abs_S100_A*exp(j*(acos(fp100_A)));
+
+S50_B = abs_S50_B*exp(j*(acos(fp50_B)));
+S75_B = abs_S75_B*exp(j*(acos(fp75_B)));
+S100_B = abs_S100_B*exp(j*(acos(fp100_B)));
 
 %carga S das respectivas combinações
 OP01 = S50_A + S50_B;
@@ -50,6 +66,7 @@ OP06 = S75_A + S100_B;
 OP07 = S100_A + S50_B;
 OP08 = S100_A + S75_B;
 OP09 = S100_A + S100_B;
+disp('Vector do valor S das combinacoes')
 vector_OP = [OP01 OP02 OP03 OP04 OP05 OP06 OP07 OP08 OP09]'
 
 %valor absoluto das cargas
@@ -62,6 +79,7 @@ S06 = abs(OP06);
 S07 = abs(OP07);
 S08 = abs(OP08);
 S09 = abs(OP09);
+disp('Vector do valor abs de S das combinacoes')
 vector_S = [S01 S02 S03 S04 S05 S06 S07 S08 S09]'
 
 %fatores de potencias de cada carga
@@ -74,6 +92,7 @@ FP06 = real(OP06)/S06;
 FP07 = real(OP07)/S07;
 FP08 = real(OP08)/S08;
 FP09 = real(OP09)/S09;
+disp('Vector do FS das combinacoes')
 vector_FP = [FP01 FP02 FP03 FP04 FP05 FP06 FP07 FP08 FP09]'
 
 %potencia reativa das cargas
@@ -86,15 +105,19 @@ Q06 = imag(OP06);
 Q07 = imag(OP07);
 Q08 = imag(OP08);
 Q09 = imag(OP09);
+disp('Vector Q das combinacoes')
 vector_Q = [Q01 Q02 Q03 Q04 Q05 Q06 Q07 Q08 Q09]'
 
 %calculando o valor da capacitancia para corrigir a potencia reativa
+disp('Vector das compensacoes dos capacitores')
 capacitor_correcao_geral = (vector_Q)/2*pi*frequencia*tensao^2
 
 %capacitancia da correcao de menor valor de FP
+disp('capacitor da operacao 1, com menor valor de FP')
 c_correcao_01 = capacitor_correcao_geral(1,1)
 
 %corrigindo todas as cargas em paralelo com a capacitancia de menor valor de FP
+disp('Vector da correcao com uso do capacitor da operacao 1, com menor valor de FP')
 OP01_c = OP01 - j*imag(OP01);
 OP02_c = OP02 - j*imag(OP01);
 OP03_c = OP03 - j*imag(OP01);
@@ -107,6 +130,7 @@ OP09_c = OP09 - j*imag(OP01);
 vector_OP_c = [OP01_c OP02_c OP03_c OP04_c OP05_c OP06_c OP07_c OP08_c OP09_c]'
 
 %novos valores de fator de potencia apos a correcao da potencia reativa por meio do capacitor
+disp('Vector dos FP, apos a correcao com capacitor de menor FP')
 FP01_c = (real(OP01_c)/abs(OP01_c));
 FP02_c = (real(OP02_c)/abs(OP02_c));
 FP03_c = (real(OP03_c)/abs(OP03_c));
@@ -125,4 +149,4 @@ ylabel('Potência Reativa (VAr)')
 title('Triangulo Da Potencia OP09')
 
 %salvando o grafico em JPG
-saveas(gca, 'grafico_9.pdf', 'pdf')
+saveas(gca, 'grafico_9_.jpg', 'jpg')
