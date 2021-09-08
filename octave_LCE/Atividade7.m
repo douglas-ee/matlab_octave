@@ -1,23 +1,36 @@
-clear
+clear all
+clc
 
-%potencia aderida
+%dados da questao
+V = 220; % volts
+
+% potencia aderida
 pot = 2206.5;
-%fatores de potencia por rendimento% do motor
+
+% fatores de potencia por rendimento% do motor
 fp50 = 0.68;
 fp75 = 0.77;
 fp100 = 0.83;
-%potencia ativa P por rendimento% do motor
+
+% potencia ativa P por rendimento% do motor
 P50 = (pot*(50/100))/(77/100);
 P75 = (pot*(75/100))/(81/100);
 P100 = (pot*(100/100))/(81.5/100);
+
+% valor absoluto de S
+abs_S50 = P50/fp50;
+abs_S75 = P75/fp75;
+abs_S100 = P100/fp100;
+
 %carga S = P + iQ por rendimento% do motor
-S50 = P50*fp50 + i*P50*sin(acos(fp50))
-S75 = P75*fp75 + i*P75*sin(acos(fp75))
-S100 = P100*fp100 + i*P100*sin(acos(fp100))
+S50 = abs_S50*exp(j*(acos(fp50)));
+S75 = abs_S75*exp(j*(acos(fp75)));
+S100 = abs_S100*exp(j*(acos(fp100)));
+
 %corrente usada por rendimento% do motor
-I50 = conj(S50/220);
-I75 = conj(S75/220);
-I100 = conj(S100/220);
+I50 = conj(S50/V);
+I75 = conj(S75/V);
+I100 = conj(S100/V);
 
 %plotando graficos do diagrama fasorial S
 subplot(3,3,1)
@@ -50,3 +63,6 @@ subplot(3,3,6)
 plot([0 real(I100)],[0 imag(I100)])
 xlabel('Real'),ylabel('Imaginário')
 title('Diagrama Fasorial I100%')
+
+%salvando o grafico em JPG
+saveas(gca, 'grafico_7.jpg', 'jpg')

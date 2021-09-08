@@ -1,4 +1,5 @@
 clear all
+clc
 
 %imprimindo V em diferentes formatos
 V1 = 50*exp(j*deg2rad(36.87))

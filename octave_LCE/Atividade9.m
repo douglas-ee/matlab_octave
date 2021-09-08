@@ -1,7 +1,9 @@
+clear all
+clc
 
 %dados da questao
-tensao = 220;
-frequencia = 60;
+V = 220; % volts
+f = 60;  % hertz
 
 %###############################################################################
 % MUDANDO OS VALORES DOS MOTORES PARA OBTER O RESULTADO DESEJADO NA COMBINAÇAO
@@ -29,7 +31,7 @@ P50_B = (pot_B*(50/100))/(61/100);
 P75_B = (pot_B*(75/100))/(65/100);
 P100_B = (pot_B*(100/100))/(66/100);
 
-%###############################################################################
+################################################################################
 
 %carga S = P + iQ por rendimento% do motor
 ## S50_A = P50_A*fp50_A + i*P50_A*sin(acos(fp50_A));
@@ -110,7 +112,7 @@ vector_Q = [Q01 Q02 Q03 Q04 Q05 Q06 Q07 Q08 Q09]'
 
 %calculando o valor da capacitancia para corrigir a potencia reativa
 disp('Vector das compensacoes dos capacitores')
-capacitor_correcao_geral = (vector_Q)/2*pi*frequencia*tensao^2
+capacitor_correcao_geral = (vector_Q)/2*pi*f*V^2
 
 %capacitancia da correcao de menor valor de FP
 disp('capacitor da operacao 1, com menor valor de FP')
@@ -149,4 +151,4 @@ ylabel('Potência Reativa (VAr)')
 title('Triangulo Da Potencia OP09')
 
 %salvando o grafico em JPG
-saveas(gca, 'grafico_9_c.jpg', 'jpg')
+saveas(gca, 'grafico_9.jpg', 'jpg')
