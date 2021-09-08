@@ -122,7 +122,7 @@ vector_FP_c = [FP01_c FP02_c FP03_c FP04_c FP05_c FP06_c FP07_c FP08_c FP09_c]'
 plot([0 real(OP09) real(OP09) 0],[0 0 imag(OP09) 0],[0 real(OP09_c) real(OP09_c) 0],[0 0 imag(OP09_c) 0])
 xlabel('Potência Ativa (W)')
 ylabel('Potência Reativa (VAr)')
-title('Triângulo Da Potência OP09')
+title('Triangulo Da Potencia OP09')
 
 %salvando o grafico em JPG
-saveas(gca, 'grafico_9.jpg', 'jpg')
+saveas(gca, 'grafico_9.pdf', 'pdf')
