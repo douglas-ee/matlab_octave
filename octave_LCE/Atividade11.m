@@ -26,6 +26,7 @@ Icc = (R)./((1./(j*w_c*C)) + R)*I;
 figure(1)
 subplot(211), plot(w/(2*pi), abs(Ir), w/(2*pi), abs(Ic), w/(2*pi), abs(Ir+Ic), w_c/(2*pi), abs(Irc), 'o-', w_c/(2*pi), abs(Icc), 'om')
 xlabel('Frequencia [Hz]'), ylabel('|Ir| e |Ic| (A)')
+
 subplot(212), plot(w/(2*pi), angle(Ir)*180/pi, w/(2*pi), angle(Ic)*180/pi, w/(2*pi), angle(Ir+Ic)*180/pi, w_c/(2*pi), angle(Irc)*180/pi,'o-', w_c/(2*pi), angle(Icc)*180/pi,'om')
 xlabel('Frequencia [Hz]'), ylabel('Ph(Ir) e Ph(Ic) (^o)')
 
