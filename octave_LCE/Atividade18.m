@@ -3,7 +3,7 @@ clc, clear all, close all
 C = 10e-9; % [Capacitor {F}]
 L = 1e-3;  % [Indutor {H}]
 RL = 10;   % [Resistencia {R}]
-R = 28*10;    % [Resistencia {R}]
+R = 28;    % [Resistencia {R}]
 
 wo = 1/sqrt(L*C);          % [Frequencia Angular em ressonancia {rad/s}]
 p1 = floor(log10(wo))-1;   % [Potencia 1 {W}]

@@ -69,7 +69,7 @@ OP07 = S100_A + S50_B;
 OP08 = S100_A + S75_B;
 OP09 = S100_A + S100_B;
 disp('Vector do valor S das combinacoes')
-vector_OP = [OP01 OP02 OP03 OP04 OP05 OP06 OP07 OP08 OP09]'
+vector_OP = [OP01 OP02 OP03 OP04 OP05 OP06 OP07 OP08 OP09]';
 
 %valor absoluto das cargas
 S01 = abs(OP01);
@@ -82,7 +82,7 @@ S07 = abs(OP07);
 S08 = abs(OP08);
 S09 = abs(OP09);
 disp('Vector do valor abs de S das combinacoes')
-vector_S = [S01 S02 S03 S04 S05 S06 S07 S08 S09]'
+vector_S = [S01 S02 S03 S04 S05 S06 S07 S08 S09]';
 
 %fatores de potencias de cada carga
 FP01 = real(OP01)/S01;
@@ -95,7 +95,7 @@ FP07 = real(OP07)/S07;
 FP08 = real(OP08)/S08;
 FP09 = real(OP09)/S09;
 disp('Vector do FS das combinacoes')
-vector_FP = [FP01 FP02 FP03 FP04 FP05 FP06 FP07 FP08 FP09]'
+vector_FP = [FP01 FP02 FP03 FP04 FP05 FP06 FP07 FP08 FP09]';
 
 %potencia reativa das cargas
 Q01 = imag(OP01);
@@ -108,15 +108,15 @@ Q07 = imag(OP07);
 Q08 = imag(OP08);
 Q09 = imag(OP09);
 disp('Vector Q das combinacoes')
-vector_Q = [Q01 Q02 Q03 Q04 Q05 Q06 Q07 Q08 Q09]'
+vector_Q = [Q01 Q02 Q03 Q04 Q05 Q06 Q07 Q08 Q09]';
 
 %calculando o valor da capacitancia para corrigir a potencia reativa
 disp('Vector das compensacoes dos capacitores')
-capacitor_correcao_geral = (vector_Q)/2*pi*f*V^2
+capacitor_correcao_geral = (vector_Q)/2*pi*f*V^2;
 
 %capacitancia da correcao de menor valor de FP
 disp('capacitor da operacao 1, com menor valor de FP')
-c_correcao_01 = capacitor_correcao_geral(1,1)
+c_correcao_01 = capacitor_correcao_geral(1,1);
 
 %corrigindo todas as cargas em paralelo com a capacitancia de menor valor de FP
 disp('Vector da correcao com uso do capacitor da operacao 1, com menor valor de FP')
@@ -129,7 +129,7 @@ OP06_c = OP06 - j*imag(OP01);
 OP07_c = OP07 - j*imag(OP01);
 OP08_c = OP08 - j*imag(OP01);
 OP09_c = OP09 - j*imag(OP01);
-vector_OP_c = [OP01_c OP02_c OP03_c OP04_c OP05_c OP06_c OP07_c OP08_c OP09_c]'
+vector_OP_c = [OP01_c OP02_c OP03_c OP04_c OP05_c OP06_c OP07_c OP08_c OP09_c]';
 
 %novos valores de fator de potencia apos a correcao da potencia reativa por meio do capacitor
 disp('Vector dos FP, apos a correcao com capacitor de menor FP')
@@ -142,7 +142,7 @@ FP06_c = (real(OP06_c)/abs(OP06_c));
 FP07_c = (real(OP07_c)/abs(OP07_c));
 FP08_c = (real(OP08_c)/abs(OP08_c));
 FP09_c = (real(OP09_c)/abs(OP09_c));
-vector_FP_c = [FP01_c FP02_c FP03_c FP04_c FP05_c FP06_c FP07_c FP08_c FP09_c]'
+vector_FP_c = [FP01_c FP02_c FP03_c FP04_c FP05_c FP06_c FP07_c FP08_c FP09_c]';
 
 %plotando o triangulo de potencia
 plot([0 real(OP09) real(OP09) 0],[0 0 imag(OP09) 0],[0 real(OP09_c) real(OP09_c) 0],[0 0 imag(OP09_c) 0])
