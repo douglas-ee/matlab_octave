@@ -9,7 +9,7 @@ figure(1);
 x = linspace(-pi, pi, amostras);
 %definindo quem eh y
 y = sin(x);
-%plitando os valores
+%plotando os valores
 plot(x, y, 'm:o', x, cos(x), 'k-x');
 %definindo o titulo
 title('Sin e Cos')
